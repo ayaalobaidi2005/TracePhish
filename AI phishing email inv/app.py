@@ -1,7 +1,9 @@
 
+
 import re #regular expression library, helps with finding patterns in text
 import streamlit as st #importing libraries
-
+from pathlib import Path
+LOGO_PATH = Path(__file__).parent / "tracephish-logo.png"
 
 # Common phishing-related keywords
 SUSPICIOUS_KEYWORDS = [
@@ -136,7 +138,7 @@ def analyze_email(email_text):
 
 st.set_page_config(
     page_title="TracePhish | Email Investigation",
-    page_icon="tracephish-logo.png",
+    page_icon=str(LOGO_PATH),
     layout="wide"
 )
 
@@ -245,8 +247,7 @@ hr {
 header_logo, header_title = st.columns([1, 6])
 
 with header_logo:
-    st.image("tracephish-logo.png", width=100)
-
+    st.image(str(LOGO_PATH), width=100)
 with header_title:
     st.title("TracePhish")
     st.caption("EMAIL THREAT INVESTIGATION WORKBENCH")
@@ -380,3 +381,27 @@ if analyze_button:
 
     else:
         st.warning("Please paste email content before running an investigation.")
+
+st.markdown("""
+<style>
+.footer {
+    margin-top: 60px;
+    padding: 22px 10px;
+    border-top: 1px solid #263449;
+    text-align: center;
+    color: #94A3B8;
+    font-size: 12px;
+}
+.footer strong {
+    color: #FFFFFF;
+    font-size: 14px;
+}
+</style>
+
+<div class="footer">
+    <strong>TracePhish</strong><br>
+    EMAIL THREAT INVESTIGATION TOOL<br><br>
+    © 2026 Aya Al Obaidi. All rights reserved.<br>
+    Designed and developed by Aya Al Obaidi.
+</div>
+""", unsafe_allow_html=True)
